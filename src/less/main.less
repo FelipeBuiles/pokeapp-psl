@@ -80,6 +80,9 @@ html, body {
 }
 
 .pokeimage {
+    /* A not so well supported css rule, but an essential one when dealing with sprites
+        it allows me to zoom images and keep them without antialiasing, so they don't blur
+    */
     image-rendering: pixelated;
     width: 100%;
 }
@@ -94,6 +97,8 @@ canvas {
     display: none;
 }
 
+
+/* animations for the pokemon list, handled by ngAnimate, these should show up when filtering by name */
 .ng-enter, 
 .ng-leave
 { 

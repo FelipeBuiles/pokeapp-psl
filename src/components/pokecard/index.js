@@ -12,6 +12,7 @@ class PokecardDirective {
     }
 
     link(scope, element, attributes) {
+        // I use Vibrant to give me a dominant color on each sprite, so I can style the name of a pokemon 
         Vibrant.from(`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${scope.pokemon.id}.png`)
             .getPalette((err, palette) => {
                 if(palette) {
