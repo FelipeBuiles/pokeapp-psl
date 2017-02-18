@@ -1,0 +1,198 @@
+@import "variables.less";
+
+html, body {
+    width: 100%;
+    min-height: 100%;
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+    background-color: #7EABA6;
+}
+
+.input-group {
+    background-color: hsla(0, 0, 0, 0.45);
+    padding: 20px 20px 20px 20px;
+    width: 100%;
+}
+
+.btn {
+    display: block;
+    margin-bottom: 25px;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 0px;
+    border: 2px solid #7EABA6;
+    padding: 0;
+    
+    p {
+        margin: 0 !important;
+        color: white;
+        padding: 10px 0;
+        font-size: 18px;
+    }
+    
+    &:hover {
+    background-color: white;
+        border: 2px solid #1B356A;
+    }
+}
+
+.jumbotron {
+    background-image: url(../img/bg-pokemon.jpg);
+    background-size: cover;
+    padding-top: 250px;
+    border-bottom: 10px solid #1B356A;
+
+        @media (min-width: @screen-md-min) {
+            padding-top: 300px;
+            padding-bottom: 120px;
+            border-bottom: 20px solid #1B356A;
+        }    
+
+        @media (min-width: @screen-lg-min) {
+            padding-top: 380px;
+            padding-bottom: 200px;
+            border-bottom: 50px solid #1B356A;        
+        }
+   
+}
+
+.container {
+    margin-bottom: 20px;
+
+    .pagination {
+        display: block;
+        margin: auto;
+        width: 50%;
+    }
+}
+
+.navbar {
+    position: absolute;
+    width: 100%;
+    background-color: hsla(255, 255, 255, 0.85);
+    
+    
+    img {
+        margin: 10px auto;
+        display: block;
+    }
+}
+
+.pokeimage {
+    image-rendering: pixelated;
+    width: 100%;
+}
+
+footer {
+    background-color: #1B356A;
+    color: white;
+    padding: 20px;
+}
+
+canvas {
+    display: none;
+}
+
+.ng-enter, 
+.ng-leave
+{ 
+    -webkit-transition: 400ms cubic-bezier(0.420, 0.000, 1.000, 1.000) all;
+    -moz-transition: 400ms cubic-bezier(0.420, 0.000, 1.000, 1.000) all;
+    -ms-transition: 400ms cubic-bezier(0.420, 0.000, 1.000, 1.000) all;
+    -o-transition: 400ms cubic-bezier(0.420, 0.000, 1.000, 1.000) all;
+    transition: 400ms cubic-bezier(0.420, 0.000, 1.000, 1.000) all;
+    position: relative;
+    display: block;
+    overflow: hidden;
+    text-overflow: clip;
+    white-space:nowrap;
+} 
+ 
+.ng-leave.ng-leave-active,
+.ng-enter {
+    opacity: 0;
+    width: 0px;
+    height: 0px;
+}
+ 
+.ng-enter.ng-enter-active, 
+.ng-leave {
+    opacity: 1;
+    width: 150px;
+    height: 30px;
+}
+
+.details {
+    
+    .container-fluid {
+        padding: 30px 0;
+    }
+      .navbar {
+        position: relative;
+        background-image: url(../img/bg-pokemon.jpg);
+        background-repeat: no-repeat;
+        box-shadow: 0 0 0 1000px rgba(255, 255, 255, 0.8) inset;
+        border: 0px;
+        -webkit-border-radius: 0px;
+        -moz-border-radius: 0px;
+        border-radius: 0px;      
+      }
+    
+    p {
+        color: white;
+        font-size: 20px;
+    }
+    
+    .img-detail {
+        background-color: white;
+        display: block;
+        img {
+            image-rendering: pixelated;
+            width: 100%;
+        }
+        
+        p {
+            margin: 0 !important;
+            color: white;
+            padding: 10px 0;
+            font-size: 22px;
+            text-align: center;
+        }
+    }
+    
+    h2 {
+        color: white;
+        font-size: 14px;
+        font-weight: bold;
+        text-align: center;
+        text-transform: uppercase;
+    }
+}
+
+
+.c100::after {
+    background-color: #7eaba6 !important;
+}
+
+.c100 {
+    background-color: #97c4bf !important;
+}
+
+.fallback-background {
+    background-color: #939393;
+}
+
+/* Loading bar overrides */
+
+#loading-bar .peg {
+    -moz-box-shadow: rgb(236, 36, 60) 1px 0 6px 1px;
+    -ms-box-shadow: rgb(236, 36, 60) 1px 0 6px 1px;
+    -webkit-box-shadow: rgb(236, 36, 60) 1px 0 6px 1px;
+    box-shadow: rgb(236, 36, 60) 1px 0 6px 1px;
+}
+
+#loading-bar-spinner .spinner-icon {
+    border-top-color:  rgb(236, 36, 60);
+    border-left-color: rgb(236, 36, 60);
+}

@@ -1,0 +1,28 @@
+<navigation></navigation>
+
+<div class="jumbotron">
+    <div class="container">
+        <div class="col-md-offset2 col-md-12">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Search for.." ng-model="$ctrl.searchString">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="container">
+        <pokecard ng-repeat="pokemon in $ctrl.pokemons | filter:$ctrl.searchString" pokemon="pokemon"></pokecard>
+        
+        <div paging
+            page="$ctrl.paging.number" 
+            page-size="20" 
+            total="$ctrl.paging.count"
+            paging-action="$ctrl.gotoPage(page)"
+            show-prev-next="true"
+            show-first-last="true"
+            scroll-top="true" >
+            </div> 
+    </div>
+</div>
+

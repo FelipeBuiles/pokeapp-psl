@@ -1,0 +1,46 @@
+<div class="details">
+    <navigation></navigation>
+
+    <div class="container-fluid">
+        <div class="container">
+
+            <div class="col-md-6">
+                <span class="img-detail">
+                    <img ng-src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{{pokemon.id}}.png" alt="{{pokemon.name}} image" class="img-responsive center-block details-image">
+                    <p class="fallback-background" ng-style="{'background-color':pokemon.color}">{{pokemon.name}}</p>
+                </span>
+            </div>
+
+            <div class="col-md-6">
+                <hr/>
+                <p>{{pokemon.description}}</p>
+                <hr/>
+                <div class="row">
+                    <div class="col-md-6">
+                        <p><b>Height: </b>{{pokemon.height}}</p>
+                        <p><b>Weight: </b>{{pokemon.weight}}</p>
+                        <p><b>Gender: </b>{{pokemon.gender ? 'Male - Female' : 'No gender'}}</p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><b>Genus: </b>{{pokemon.type}}</p>
+                        <p><b>Ability 1: </b>{{pokemon.abilities[0]}}</p>
+                        <p><b>Ability 2: </b>{{pokemon.abilities[1]}}</p>                                                
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <div class="col-sm-2" ng-repeat="(statname, stat) in pokemon.stats">
+                    <h2>{{statname}}</h2>
+                    <div class="c100 p{{stat}} small center" ng-class="{green: (statname == 'Defense' || statname == 'Speed'), orange: (statname == 'Special Attack' || statname == 'Health Points')}">
+                        <span>{{stat}}%</span>
+                        <div class="slice">
+                            <div class="bar"></div>
+                            <div class="fill"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

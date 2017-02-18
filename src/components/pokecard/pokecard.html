@@ -1,0 +1,6 @@
+<div class="col-sm-6 col-md-3">
+    <a ui-sref="details({id: pokemon.id})" class="btn btn-default" role="button">
+        <img ng-src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{{pokemon.id}}.png" alt="{{pokemon.name}} image" class="img-responsive pokeimage">
+        <p id="{{pokemon.id}}" class="fallback-background" ng-style="{'background-color':pokemon.color}">{{pokemon.name}}</p>
+    </a>
+</div>
