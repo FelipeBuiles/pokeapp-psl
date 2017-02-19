@@ -9,9 +9,9 @@ class controller {
                 this.pokemons = this.processData(data)
                 this.paging = {
                     number: 1,
-                    count: 678 // data.count
+                    count: 780 // data.count
                 } 
-                /* pokeapi actually lists 800+ pokemons, but from 679 and later they don't have complete info about them,
+                /* pokeapi actually lists 800+ pokemons, but from 784 and later they don't have sprites,
                     so I'll just list the others */
             })
     }

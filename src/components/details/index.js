@@ -27,7 +27,7 @@ class DetailsDirective {
             type: scope.pkmn.species.genera[0].genus,
             abilities: [
                 scope.pkmn.abilities[0].ability.name,
-                scope.pkmn.abilities[1].ability.name
+                (scope.pkmn.abilities[1] ? scope.pkmn.abilities[1].ability.name : '---')
             ],
             stats: {
                 'Speed': scope.pkmn.stats[0].base_stat,

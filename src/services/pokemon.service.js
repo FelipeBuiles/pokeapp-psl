@@ -1,8 +1,9 @@
 import angular from 'angular'
 
 class Pokemon {
-    constructor($http) {
+    constructor($http, $q) {
         this.$http = $http
+        this.$q = $q
     }
 
     all() {
@@ -25,7 +26,11 @@ class Pokemon {
             return this.$http.get(pkmn.species.url).then(speciesResp => {
                 // and append it to the original response
                 pkmn.species = speciesResp.data
-                return pkmn
+                if(pkmn && pkmn.species) {
+                    return pkmn
+                } else {
+                    return this.$q.reject('No info on that pokemon')
+                }
             })
         })
     }
