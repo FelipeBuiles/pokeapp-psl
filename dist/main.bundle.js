@@ -5527,7 +5527,7 @@ var Pokemon = function () {
     _createClass(Pokemon, [{
         key: 'all',
         value: function all() {
-            return this.$http.get('http://pokeapi.co/api/v2/pokemon/').then(function (resp) {
+            return this.$http.get('https://pokeapi.co/api/v2/pokemon/').then(function (resp) {
                 return resp.data;
             });
         }
@@ -5535,7 +5535,7 @@ var Pokemon = function () {
         key: 'getPage',
         value: function getPage(page) {
             var offset = (page - 1) * 20;
-            return this.$http.get('http://pokeapi.co/api/v2/pokemon/?offset=' + offset).then(function (resp) {
+            return this.$http.get('https://pokeapi.co/api/v2/pokemon/?offset=' + offset).then(function (resp) {
                 return resp.data;
             });
         }
@@ -5544,9 +5544,11 @@ var Pokemon = function () {
         value: function pokemon(id) {
             var _this = this;
 
-            return this.$http.get('http://pokeapi.co/api/v2/pokemon/' + id).then(function (resp) {
+            return this.$http.get('https://pokeapi.co/api/v2/pokemon/' + id).then(function (resp) {
                 var pkmn = resp.data;
+                // I need more infor than what is on the base request for a pokemon, so I have to make a new call for that
                 return _this.$http.get(pkmn.species.url).then(function (speciesResp) {
+                    // and append it to the original response
                     pkmn.species = speciesResp.data;
                     return pkmn;
                 });
@@ -10801,7 +10803,6 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = routing;
 function routing($urlRouterProvider, $locationProvider) {
-    //$locationProvider.html5Mode(true);
     $urlRouterProvider.otherwise('/');
 }
 
@@ -10893,7 +10894,7 @@ var DetailsDirective = function () {
     return DetailsDirective;
 }();
 
-exports.default = _angular2.default.module('pokeapp.details', [_pokemonService2.default]).directive('pokedetails', function () {
+exports.default = _angular2.default.module('pokeapp.details', [_pokemonService2.default]).directive('pokeDetails', function () {
     return new DetailsDirective();
 }).config(_detailsState2.default).name;
 
@@ -10924,9 +10925,10 @@ var _listComponent = __webpack_require__(91);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+//Paging isn't ES2015 import ready, so I have to let webpack do its black magic on it and import it as an IIFE
 __webpack_require__(114);
 
-exports.default = _angular2.default.module('pokeapp.list', [_pokemonService2.default, 'bw.paging']).component('list', _listComponent.ListComponent).config(_listState2.default).name;
+exports.default = _angular2.default.module('pokeapp.list', [_pokemonService2.default, 'bw.paging']).component('pokeList', _listComponent.ListComponent).config(_listState2.default).name;
 
 /***/ }),
 /* 65 */
@@ -10947,7 +10949,7 @@ var _navComponent = __webpack_require__(93);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-exports.default = _angular2.default.module('pokeapp.nav', []).component('navigation', _navComponent.NavComponent).name;
+exports.default = _angular2.default.module('pokeapp.nav', []).component('pokeNav', _navComponent.NavComponent).name;
 
 /***/ }),
 /* 66 */
@@ -10994,6 +10996,7 @@ var PokecardDirective = function () {
     _createClass(PokecardDirective, [{
         key: 'link',
         value: function link(scope, element, attributes) {
+            // I use Vibrant to give me a dominant color on each sprite, so I can style the name of a pokemon 
             Vibrant.from('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/' + scope.pokemon.id + '.png').getPalette(function (err, palette) {
                 if (palette) {
                     var color = palette.Vibrant.rgb;
@@ -11008,7 +11011,7 @@ var PokecardDirective = function () {
     return PokecardDirective;
 }();
 
-exports.default = _angular2.default.module('pokeapp.pokecard', []).directive('pokecard', function () {
+exports.default = _angular2.default.module('pokeapp.pokecard', []).directive('pokeCard', function () {
     return new PokecardDirective();
 }).name;
 
@@ -50671,7 +50674,7 @@ exports = module.exports = __webpack_require__(16)();
 
 
 // module
-exports.push([module.i, "html,\nbody {\n  width: 100%;\n  min-height: 100%;\n  overflow-x: hidden;\n  margin: 0;\n  padding: 0;\n  background-color: #7EABA6;\n}\n.input-group {\n  background-color: rgba(0, 0, 0, 0.45);\n  padding: 20px 20px 20px 20px;\n  width: 100%;\n}\n.btn {\n  display: block;\n  margin-bottom: 25px;\n  -webkit-border-radius: 0px;\n  -moz-border-radius: 0px;\n  border-radius: 0px;\n  border: 2px solid #7EABA6;\n  padding: 0;\n}\n.btn p {\n  margin: 0 !important;\n  color: white;\n  padding: 10px 0;\n  font-size: 18px;\n}\n.btn:hover {\n  background-color: white;\n  border: 2px solid #1B356A;\n}\n.jumbotron {\n  background-image: url(" + __webpack_require__(36) + ");\n  background-size: cover;\n  padding-top: 250px;\n  border-bottom: 10px solid #1B356A;\n}\n@media (min-width: 992px) {\n  .jumbotron {\n    padding-top: 300px;\n    padding-bottom: 120px;\n    border-bottom: 20px solid #1B356A;\n  }\n}\n@media (min-width: 1400px) {\n  .jumbotron {\n    padding-top: 380px;\n    padding-bottom: 200px;\n    border-bottom: 50px solid #1B356A;\n  }\n}\n.container {\n  margin-bottom: 20px;\n}\n.container .pagination {\n  display: block;\n  margin: auto;\n  width: 50%;\n}\n.navbar {\n  position: absolute;\n  width: 100%;\n  background-color: rgba(255, 255, 255, 0.85);\n}\n.navbar img {\n  margin: 10px auto;\n  display: block;\n}\n.pokeimage {\n  image-rendering: pixelated;\n  width: 100%;\n}\nfooter {\n  background-color: #1B356A;\n  color: white;\n  padding: 20px;\n}\ncanvas {\n  display: none;\n}\n.ng-enter,\n.ng-leave {\n  -webkit-transition: 400ms cubic-bezier(0.42, 0, 1, 1) all;\n  -moz-transition: 400ms cubic-bezier(0.42, 0, 1, 1) all;\n  -ms-transition: 400ms cubic-bezier(0.42, 0, 1, 1) all;\n  -o-transition: 400ms cubic-bezier(0.42, 0, 1, 1) all;\n  transition: 400ms cubic-bezier(0.42, 0, 1, 1) all;\n  position: relative;\n  display: block;\n  overflow: hidden;\n  text-overflow: clip;\n  white-space: nowrap;\n}\n.ng-leave.ng-leave-active,\n.ng-enter {\n  opacity: 0;\n  width: 0px;\n  height: 0px;\n}\n.ng-enter.ng-enter-active,\n.ng-leave {\n  opacity: 1;\n  width: 150px;\n  height: 30px;\n}\n.details .container-fluid {\n  padding: 30px 0;\n}\n.details .navbar {\n  position: relative;\n  background-image: url(" + __webpack_require__(36) + ");\n  background-repeat: no-repeat;\n  box-shadow: 0 0 0 1000px rgba(255, 255, 255, 0.8) inset;\n  border: 0px;\n  -webkit-border-radius: 0px;\n  -moz-border-radius: 0px;\n  border-radius: 0px;\n}\n.details p {\n  color: white;\n  font-size: 20px;\n}\n.details .img-detail {\n  background-color: white;\n  display: block;\n}\n.details .img-detail img {\n  image-rendering: pixelated;\n  width: 100%;\n}\n.details .img-detail p {\n  margin: 0 !important;\n  color: white;\n  padding: 10px 0;\n  font-size: 22px;\n  text-align: center;\n}\n.details h2 {\n  color: white;\n  font-size: 14px;\n  font-weight: bold;\n  text-align: center;\n  text-transform: uppercase;\n}\n.c100::after {\n  background-color: #7eaba6 !important;\n}\n.c100 {\n  background-color: #97c4bf !important;\n}\n.fallback-background {\n  background-color: #939393;\n}\n/* Loading bar overrides */\n#loading-bar .peg {\n  -moz-box-shadow: #ec243c 1px 0 6px 1px;\n  -ms-box-shadow: #ec243c 1px 0 6px 1px;\n  -webkit-box-shadow: #ec243c 1px 0 6px 1px;\n  box-shadow: #ec243c 1px 0 6px 1px;\n}\n#loading-bar-spinner .spinner-icon {\n  border-top-color: #ec243c;\n  border-left-color: #ec243c;\n}\n", ""]);
+exports.push([module.i, "html,\nbody {\n  width: 100%;\n  min-height: 100%;\n  overflow-x: hidden;\n  margin: 0;\n  padding: 0;\n  background-color: #7EABA6;\n}\n.input-group {\n  background-color: rgba(0, 0, 0, 0.45);\n  padding: 20px 20px 20px 20px;\n  width: 100%;\n}\n.btn {\n  display: block;\n  margin-bottom: 25px;\n  -webkit-border-radius: 0px;\n  -moz-border-radius: 0px;\n  border-radius: 0px;\n  border: 2px solid #7EABA6;\n  padding: 0;\n}\n.btn p {\n  margin: 0 !important;\n  color: white;\n  padding: 10px 0;\n  font-size: 18px;\n}\n.btn:hover {\n  background-color: white;\n  border: 2px solid #1B356A;\n}\n.jumbotron {\n  background-image: url(" + __webpack_require__(36) + ");\n  background-size: cover;\n  padding-top: 250px;\n  border-bottom: 10px solid #1B356A;\n}\n@media (min-width: 992px) {\n  .jumbotron {\n    padding-top: 300px;\n    padding-bottom: 120px;\n    border-bottom: 20px solid #1B356A;\n  }\n}\n@media (min-width: 1400px) {\n  .jumbotron {\n    padding-top: 380px;\n    padding-bottom: 200px;\n    border-bottom: 50px solid #1B356A;\n  }\n}\n.container {\n  margin-bottom: 20px;\n}\n.container .pagination {\n  display: block;\n  margin: auto;\n  width: 50%;\n}\n.navbar {\n  position: absolute;\n  width: 100%;\n  background-color: rgba(255, 255, 255, 0.85);\n}\n.navbar img {\n  margin: 10px auto;\n  display: block;\n}\n.pokeimage {\n  /* A not so well supported css rule, but an essential one when dealing with sprites\n        it allows me to zoom images and keep them without antialiasing, so they don't blur\n    */\n  image-rendering: pixelated;\n  width: 100%;\n}\nfooter {\n  background-color: #1B356A;\n  color: white;\n  padding: 20px;\n}\ncanvas {\n  display: none;\n}\n/* animations for the pokemon list, handled by ngAnimate, these should show up when filtering by name */\n.ng-enter,\n.ng-leave {\n  -webkit-transition: 400ms cubic-bezier(0.42, 0, 1, 1) all;\n  -moz-transition: 400ms cubic-bezier(0.42, 0, 1, 1) all;\n  -ms-transition: 400ms cubic-bezier(0.42, 0, 1, 1) all;\n  -o-transition: 400ms cubic-bezier(0.42, 0, 1, 1) all;\n  transition: 400ms cubic-bezier(0.42, 0, 1, 1) all;\n  position: relative;\n  display: block;\n  overflow: hidden;\n  text-overflow: clip;\n  white-space: nowrap;\n}\n.ng-leave.ng-leave-active,\n.ng-enter {\n  opacity: 0;\n  width: 0px;\n  height: 0px;\n}\n.ng-enter.ng-enter-active,\n.ng-leave {\n  opacity: 1;\n  width: 150px;\n  height: 30px;\n}\n.details .container-fluid {\n  padding: 30px 0;\n}\n.details .navbar {\n  position: relative;\n  background-image: url(" + __webpack_require__(36) + ");\n  background-repeat: no-repeat;\n  box-shadow: 0 0 0 1000px rgba(255, 255, 255, 0.8) inset;\n  border: 0px;\n  -webkit-border-radius: 0px;\n  -moz-border-radius: 0px;\n  border-radius: 0px;\n}\n.details p {\n  color: white;\n  font-size: 20px;\n}\n.details .img-detail {\n  background-color: white;\n  display: block;\n}\n.details .img-detail img {\n  image-rendering: pixelated;\n  width: 100%;\n}\n.details .img-detail p {\n  margin: 0 !important;\n  color: white;\n  padding: 10px 0;\n  font-size: 22px;\n  text-align: center;\n}\n.details h2 {\n  color: white;\n  font-size: 14px;\n  font-weight: bold;\n  text-align: center;\n  text-transform: uppercase;\n}\n.c100::after {\n  background-color: #7eaba6 !important;\n}\n.c100 {\n  background-color: #97c4bf !important;\n}\n.fallback-background {\n  background-color: #939393;\n}\n/* Loading bar overrides */\n#loading-bar .bar {\n  background-color: #ec243c;\n}\n#loading-bar .peg {\n  -moz-box-shadow: #ec243c 1px 0 6px 1px;\n  -ms-box-shadow: #ec243c 1px 0 6px 1px;\n  -webkit-box-shadow: #ec243c 1px 0 6px 1px;\n  box-shadow: #ec243c 1px 0 6px 1px;\n}\n#loading-bar-spinner .spinner-icon {\n  border-top-color: #ec243c;\n  border-left-color: #ec243c;\n}\n", ""]);
 
 // exports
 
@@ -60935,11 +60938,16 @@ exports.default = state;
 function state($stateProvider) {
     $stateProvider.state('details', {
         url: '/details/:id',
+        /*
+            Here I have to do some trickery to get a directive to play nicely with ui-router and a resolve
+            First I define an intermediate controller to receive the resolved data, and add it to its $scope
+            then I instance the directive and pass it the resolved data through an html attribute
+        */
         controller: function controller($scope, pokemon) {
             this.pokemon = pokemon;
         },
         controllerAs: 'detailsState',
-        template: '<pokedetails pkmn="detailsState.pokemon"></pokedetails>',
+        template: '<poke-details pkmn="detailsState.pokemon"></poke-details>',
         resolve: {
             pokemon: function pokemon(PokemonService, $stateParams) {
                 return PokemonService.pokemon($stateParams.id);
@@ -61034,8 +61042,8 @@ exports.default = state;
 function state($stateProvider) {
     $stateProvider.state('list', {
         url: '/',
-        name: 'list',
-        component: 'list'
+        name: 'pokeList',
+        component: 'pokeList'
     });
 }
 
@@ -61059,6 +61067,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
+// Manually require the img so webpack knows to bundle it
 var logo = __webpack_require__(88);
 
 var controller = function controller() {
@@ -63284,13 +63293,13 @@ module.exports = "/**\n * @ngDoc directive\n * @name ng.directive:paging\n *\n *
 /* 109 */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"details\">\r\n    <navigation></navigation>\r\n\r\n    <div class=\"container-fluid\">\r\n        <div class=\"container\">\r\n\r\n            <div class=\"col-md-6\">\r\n                <span class=\"img-detail\">\r\n                    <img ng-src=\"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{{pokemon.id}}.png\" alt=\"{{pokemon.name}} image\" class=\"img-responsive center-block details-image\">\r\n                    <p class=\"fallback-background\" ng-style=\"{'background-color':pokemon.color}\">{{pokemon.name}}</p>\r\n                </span>\r\n            </div>\r\n\r\n            <div class=\"col-md-6\">\r\n                <hr/>\r\n                <p>{{pokemon.description}}</p>\r\n                <hr/>\r\n                <div class=\"row\">\r\n                    <div class=\"col-md-6\">\r\n                        <p><b>Height: </b>{{pokemon.height}}</p>\r\n                        <p><b>Weight: </b>{{pokemon.weight}}</p>\r\n                        <p><b>Gender: </b>{{pokemon.gender ? 'Male - Female' : 'No gender'}}</p>\r\n                    </div>\r\n                    <div class=\"col-md-6\">\r\n                        <p><b>Genus: </b>{{pokemon.type}}</p>\r\n                        <p><b>Ability 1: </b>{{pokemon.abilities[0]}}</p>\r\n                        <p><b>Ability 2: </b>{{pokemon.abilities[1]}}</p>                                                \r\n                    </div>\r\n                </div>\r\n            </div>\r\n\r\n            <div class=\"col-md-12\">\r\n                <div class=\"col-sm-2\" ng-repeat=\"(statname, stat) in pokemon.stats\">\r\n                    <h2>{{statname}}</h2>\r\n                    <div class=\"c100 p{{stat}} small center\" ng-class=\"{green: (statname == 'Defense' || statname == 'Speed'), orange: (statname == 'Special Attack' || statname == 'Health Points')}\">\r\n                        <span>{{stat}}%</span>\r\n                        <div class=\"slice\">\r\n                            <div class=\"bar\"></div>\r\n                            <div class=\"fill\"></div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>"
+module.exports = "<div class=\"details\">\r\n    <poke-nav></poke-nav>\r\n\r\n    <div class=\"container-fluid\">\r\n        <div class=\"container\">\r\n\r\n            <div class=\"col-md-6\">\r\n                <span class=\"img-detail\">\r\n                    <img ng-src=\"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{{pokemon.id}}.png\" alt=\"{{pokemon.name}} image\" class=\"img-responsive center-block details-image\">\r\n                    <p class=\"fallback-background\" ng-style=\"{'background-color':pokemon.color}\">{{pokemon.name}}</p>\r\n                </span>\r\n            </div>\r\n\r\n            <div class=\"col-md-6\">\r\n                <hr/>\r\n                <p>{{pokemon.description}}</p>\r\n                <hr/>\r\n                <div class=\"row\">\r\n                    <div class=\"col-md-6\">\r\n                        <p><b>Height: </b>{{pokemon.height}}</p>\r\n                        <p><b>Weight: </b>{{pokemon.weight}}</p>\r\n                        <p><b>Gender: </b>{{pokemon.gender ? 'Male - Female' : 'No gender'}}</p>\r\n                    </div>\r\n                    <div class=\"col-md-6\">\r\n                        <p><b>Genus: </b>{{pokemon.type}}</p>\r\n                        <p><b>Ability 1: </b>{{pokemon.abilities[0]}}</p>\r\n                        <p><b>Ability 2: </b>{{pokemon.abilities[1]}}</p>                                                \r\n                    </div>\r\n                </div>\r\n            </div>\r\n\r\n            <div class=\"col-md-12\">\r\n                <div class=\"col-sm-2\" ng-repeat=\"(statname, stat) in pokemon.stats\">\r\n                    <h2>{{statname}}</h2>\r\n                    <div class=\"c100 p{{stat}} small center\" ng-class=\"{green: (statname == 'Defense' || statname == 'Speed'), orange: (statname == 'Special Attack' || statname == 'Health Points')}\">\r\n                        <span>{{stat}}%</span>\r\n                        <div class=\"slice\">\r\n                            <div class=\"bar\"></div>\r\n                            <div class=\"fill\"></div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>"
 
 /***/ }),
 /* 110 */
 /***/ (function(module, exports) {
 
-module.exports = "<navigation></navigation>\r\n\r\n<div class=\"jumbotron\">\r\n    <div class=\"container\">\r\n        <div class=\"col-md-offset2 col-md-12\">\r\n            <div class=\"input-group\">\r\n                <input type=\"text\" class=\"form-control\" placeholder=\"Search for..\" ng-model=\"$ctrl.searchString\">\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n\r\n<div class=\"container-fluid\">\r\n    <div class=\"container\">\r\n        <pokecard ng-repeat=\"pokemon in $ctrl.pokemons | filter:$ctrl.searchString\" pokemon=\"pokemon\"></pokecard>\r\n        \r\n        <div paging\r\n            page=\"$ctrl.paging.number\" \r\n            page-size=\"20\" \r\n            total=\"$ctrl.paging.count\"\r\n            paging-action=\"$ctrl.gotoPage(page)\"\r\n            show-prev-next=\"true\"\r\n            show-first-last=\"true\"\r\n            scroll-top=\"true\" >\r\n            </div> \r\n    </div>\r\n</div>\r\n\r\n"
+module.exports = "<navigation></navigation>\r\n\r\n<div class=\"jumbotron\">\r\n    <div class=\"container\">\r\n        <div class=\"col-md-offset2 col-md-12\">\r\n            <div class=\"input-group\">\r\n                <input type=\"text\" class=\"form-control\" placeholder=\"Search for..\" ng-model=\"$ctrl.searchString\">\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n\r\n<div class=\"container-fluid\">\r\n    <div class=\"container\">\r\n        <poke-card ng-repeat=\"pokemon in $ctrl.pokemons | filter:$ctrl.searchString\" pokemon=\"pokemon\"></poke-card>\r\n        \r\n        <div paging\r\n            page=\"$ctrl.paging.number\" \r\n            page-size=\"20\" \r\n            total=\"$ctrl.paging.count\"\r\n            paging-action=\"$ctrl.gotoPage(page)\"\r\n            show-prev-next=\"true\"\r\n            show-first-last=\"true\"\r\n            scroll-top=\"true\" >\r\n            </div> \r\n    </div>\r\n</div>\r\n\r\n"
 
 /***/ }),
 /* 111 */

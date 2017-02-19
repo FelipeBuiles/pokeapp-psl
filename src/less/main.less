@@ -190,11 +190,16 @@ canvas {
 
 /* Loading bar overrides */
 
-#loading-bar .peg {
-    -moz-box-shadow: rgb(236, 36, 60) 1px 0 6px 1px;
-    -ms-box-shadow: rgb(236, 36, 60) 1px 0 6px 1px;
-    -webkit-box-shadow: rgb(236, 36, 60) 1px 0 6px 1px;
-    box-shadow: rgb(236, 36, 60) 1px 0 6px 1px;
+#loading-bar {
+    .bar {
+        background-color: rgb(236, 36, 60);
+    }
+    .peg {
+        -moz-box-shadow: rgb(236, 36, 60) 1px 0 6px 1px;
+        -ms-box-shadow: rgb(236, 36, 60) 1px 0 6px 1px;
+        -webkit-box-shadow: rgb(236, 36, 60) 1px 0 6px 1px;
+        box-shadow: rgb(236, 36, 60) 1px 0 6px 1px;
+    }
 }
 
 #loading-bar-spinner .spinner-icon {

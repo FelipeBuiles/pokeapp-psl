@@ -4,7 +4,8 @@
   "description": "PSL technical test",
   "scripts": {
     "build": "rimraf -r dist && webpack",
-    "dev": "webpack-dev-server --inline --hot"
+    "dev": "webpack-dev-server --inline --hot",
+    "publish": "node bin/publish.js"
   },
   "dependencies": {
     "angular": "^1.6.2",

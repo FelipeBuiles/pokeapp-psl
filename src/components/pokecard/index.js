@@ -26,5 +26,5 @@ class PokecardDirective {
 }
 
 export default angular.module('pokeapp.pokecard', [])
-    .directive('pokecard',() => new PokecardDirective)
+    .directive('pokeCard',() => new PokecardDirective)
     .name

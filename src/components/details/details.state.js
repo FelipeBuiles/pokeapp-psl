@@ -11,7 +11,7 @@ export default function state($stateProvider) {
                 this.pokemon = pokemon;
             },
             controllerAs: 'detailsState',
-            template: '<pokedetails pkmn="detailsState.pokemon"></pokedetails>',
+            template: '<poke-details pkmn="detailsState.pokemon"></poke-details>',
             resolve: {
                 pokemon: (PokemonService, $stateParams) => PokemonService.pokemon($stateParams.id)
             }

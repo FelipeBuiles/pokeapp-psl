@@ -12,7 +12,7 @@
 
 <div class="container-fluid">
     <div class="container">
-        <pokecard ng-repeat="pokemon in $ctrl.pokemons | filter:$ctrl.searchString" pokemon="pokemon"></pokecard>
+        <poke-card ng-repeat="pokemon in $ctrl.pokemons | filter:$ctrl.searchString" pokemon="pokemon"></poke-card>
         
         <div paging
             page="$ctrl.paging.number" 

@@ -52,6 +52,6 @@ class DetailsDirective {
 }
 
 export default angular.module('pokeapp.details', [PokemonService])
-    .directive('pokedetails', () => new DetailsDirective)
+    .directive('pokeDetails', () => new DetailsDirective)
     .config(state)
     .name

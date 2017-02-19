@@ -8,6 +8,6 @@ import { ListComponent } from './list.component.js'
 require('script-loader!angular-paging/dist/paging.js')
 
 export default angular.module('pokeapp.list', [PokemonService, 'bw.paging'])
-    .component('list', ListComponent)
+    .component('pokeList', ListComponent)
     .config(state)
     .name
