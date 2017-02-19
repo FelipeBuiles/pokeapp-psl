@@ -5518,10 +5518,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var Pokemon = function () {
-    function Pokemon($http) {
+    function Pokemon($http, $q) {
         _classCallCheck(this, Pokemon);
 
         this.$http = $http;
+        this.$q = $q;
     }
 
     _createClass(Pokemon, [{
@@ -5550,7 +5551,11 @@ var Pokemon = function () {
                 return _this.$http.get(pkmn.species.url).then(function (speciesResp) {
                     // and append it to the original response
                     pkmn.species = speciesResp.data;
-                    return pkmn;
+                    if (pkmn && pkmn.species) {
+                        return pkmn;
+                    } else {
+                        return _this.$q.reject('No info on that pokemon');
+                    }
                 });
             });
         }
@@ -10870,7 +10875,7 @@ var DetailsDirective = function () {
                 weight: scope.pkmn.weight,
                 gender: scope.pkmn.species.gender_rate >= 1,
                 type: scope.pkmn.species.genera[0].genus,
-                abilities: [scope.pkmn.abilities[0].ability.name, scope.pkmn.abilities[1].ability.name],
+                abilities: [scope.pkmn.abilities[0].ability.name, scope.pkmn.abilities[1] ? scope.pkmn.abilities[1].ability.name : '---'],
                 stats: {
                     'Speed': scope.pkmn.stats[0].base_stat,
                     'Special Defense': scope.pkmn.stats[1].base_stat,
@@ -60992,9 +60997,9 @@ var controller = function () {
             _this.pokemons = _this.processData(data);
             _this.paging = {
                 number: 1,
-                count: 678 // data.count
+                count: 780 // data.count
             };
-            /* pokeapi actually lists 800+ pokemons, but from 679 and later they don't have complete info about them,
+            /* pokeapi actually lists 800+ pokemons, but from 784 and later they don't have sprites,
                 so I'll just list the others */
         });
     }
